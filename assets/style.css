@@ -1,0 +1,28 @@
+body{
+    background-color:#243447;
+}
+
+ul{
+  padding:0;
+}
+
+ul li{
+    padding:15px;
+    background-color:rgb(0,36,54);
+    color:white;
+    font-weight:bold;
+    font-family:'Trebuchet MS';
+    border:1px solid #243447;
+}
+
+ul li:hover{
+    text-decoration: line-through;
+}
+form{
+    background-color:rgb(0,36,54);
+}
+form input{
+  width:100%;
+  padding:10px 0;
+  text-indent:5px;
+}

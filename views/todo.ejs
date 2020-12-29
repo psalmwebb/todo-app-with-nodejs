@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="/style.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app">
+
+        <form>
+           <input type="text" placeholder="Add todo" name="input">
+        </form>
+
+        <ul>
+          <% for(let i=0;i<data.length;i++){ %>
+            <li><%= data[i].item %></li>
+          <%}%>
+        </ul>
+    </div>
+
+
+    <script>
+
+        const form = document.querySelector("form")
+
+        const lis = document.querySelectorAll("ul li")
+
+        let xhr = new XMLHttpRequest()
+
+
+        form.addEventListener("submit",()=>{
+            event.preventDefault()
+
+            xhr.open("post","/todo")
+
+            xhr.setRequestHeader("Content-Type","application/json")
+
+            xhr.onload =()=>{
+               console.log(xhr.responseText)
+               location.reload()
+            }
+
+            let data = {
+                input:form.children[0].value
+            }
+
+            xhr.send(JSON.stringify(data))
+        })
+
+        lis.forEach((li)=>{
+          
+            li.onclick =()=>{
+                let str = li.textContent.replace(/ /g,"-")
+                xhr.open("delete","/todo/"+str)
+
+                xhr.onload =()=>{
+                    console.log(xhr.responseText)
+                    location.reload()
+                }
+
+                xhr.send()
+            }
+        })
+
+
+        
+    </script>
+</body>
+</html>
